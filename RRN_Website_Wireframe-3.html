@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RRN SCC — Website Wireframe & Design Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F2C422;
+    --gold-light: #FFFBB6;
+    --navy: #0B2346;
+    --navy-mid: #1B3A5C;
+    --navy-light: #2E6DA4;
+    --white: #FFFFFF;
+    --off-white: #F8F6F0;
+    --gray: #6B7280;
+    --gray-light: #E5E7EB;
+    --red: #C0392B;
+    --green: #1E7E34;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: #F0EDE6;
+    color: var(--navy);
+  }
+
+  /* ── DOCUMENT HEADER ─────────────────────────────────────────── */
+  .doc-header {
+    background: var(--navy);
+    color: white;
+    padding: 48px 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.08;
+  }
+  .doc-header .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .doc-header h1 {
+    font-family: var(--font-display);
+    font-size: 42px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .doc-header p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    max-width: 620px;
+    line-height: 1.6;
+  }
+  .doc-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .doc-meta-item { font-size: 13px; }
+  .doc-meta-item .key { color: var(--gold); font-weight: 600; margin-bottom: 2px; }
+  .doc-meta-item .val { color: rgba(255,255,255,0.7); }
+
+  /* ── NAV TABS ─────────────────────────────────────────────────── */
+  .page-nav {
+    display: flex;
+    background: var(--navy-mid);
+    padding: 0 60px;
+    gap: 4px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .page-nav button {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.55);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 14px 18px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .page-nav button:hover { color: white; }
+  .page-nav button.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── PAGE CONTAINER ───────────────────────────────────────────── */
+  .page-section { display: none; padding: 48px 60px 80px; }
+  .page-section.active { display: block; }
+
+  /* ── SECTION LABEL ────────────────────────────────────────────── */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gray);
+    background: white;
+    border: 1px solid var(--gray-light);
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+  }
+
+  /* ── WIREFRAME COMPONENTS ─────────────────────────────────────── */
+  .wireframe {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(11,35,70,0.08);
+    margin-bottom: 32px;
+  }
+
+  /* Simulated browser chrome */
+  .browser-bar {
+    background: #E8E8E8;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #D0D0D0;
+  }
+  .browser-dot {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+  }
+  .browser-dot:nth-child(1) { background: #FF5F56; }
+  .browser-dot:nth-child(2) { background: #FFBD2E; }
+  .browser-dot:nth-child(3) { background: #27C93F; }
+  .browser-url {
+    flex: 1;
+    background: white;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: #666;
+    margin-left: 8px;
+  }
+
+  /* ── SIMULATED SITE COMPONENTS ────────────────────────────────── */
+
+  /* Navbar */
+  .sim-nav {
+    background: var(--navy);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .sim-nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sim-logo-circle {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: var(--navy);
+  }
+  .sim-logo-text {
+    font-size: 13px; font-weight: 700; color: white;
+    line-height: 1.2;
+  }
+  .sim-logo-text span { color: var(--gold); }
+  .sim-nav-links {
+    display: flex; gap: 28px; align-items: center;
+  }
+  .sim-nav-link {
+    font-size: 12px; color: rgba(255,255,255,0.75); font-weight: 500;
+  }
+  .sim-nav-cta {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px; font-weight: 700;
+  }
+  .sim-nav-lang {
+    font-size: 11px; color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 4px 8px; border-radius: 4px;
+  }
+
+  /* Hero */
+  .sim-hero {
+    background: var(--navy);
+    padding: 64px 40px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .sim-hero::after {
+    content: '';
+    position: absolute;
+    right: -40px; bottom: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.06;
+  }
+  .sim-hero-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .sim-hero h2 {
+    font-family: var(--font-display);
+    font-size: 38px; line-height: 1.15;
+    color: white; max-width: 500px;
+    margin-bottom: 18px;
+  }
+  .sim-hero h2 em { color: var(--gold); font-style: italic; }
+  .sim-hero p {
+    font-size: 14px; color: rgba(255,255,255,0.7);
+    max-width: 440px; line-height: 1.65; margin-bottom: 28px;
+  }
+  .sim-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .sim-btn-primary {
+    background: var(--gold); color: var(--navy);
+    padding: 13px 24px; border-radius: 8px;
+    font-size: 13px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .sim-btn-secondary {
+    background: rgba(255,255,255,0.1); color: white;
+    padding: 13px 24px; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* Hotline banner */
+  .sim-hotline-banner {
+    background: var(--gold);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sim-hotline-left {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .sim-hotline-icon {
+    font-size: 22px;
+  }
+  .sim-hotline-text .top {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(11,35,70,0.65);
+  }
+  .sim-hotline-text .num {
+    font-family: var(--font-display);
+    font-size: 26px; color: var(--navy); line-height: 1;
+  }
+  .sim-hotline-right {
+    font-size: 12px; color: rgba(11,35,70,0.7);
+    text-align: right; line-height: 1.5;
+  }
+
+  /* 3-path cards */
+  .sim-paths {
+    padding: 40px 40px 32px;
+    background: var(--off-white);
+  }
+  .sim-paths-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray);
+    margin-bottom: 20px;
+  }
+  .sim-paths-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  }
+  .sim-path-card {
+    background: white; border-radius: 10px;
+    padding: 20px; border-top: 4px solid;
+  }
+  .sim-path-card:nth-child(1) { border-color: var(--red); }
+  .sim-path-card:nth-child(2) { border-color: var(--navy); }
+  .sim-path-card:nth-child(3) { border-color: var(--navy-light); }
+  .sim-path-letter {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 8px; color: var(--gray);
+  }
+  .sim-path-title {
+    font-size: 13px; font-weight: 700; color: var(--navy);
+    margin-bottom: 8px; line-height: 1.3;
+  }
+  .sim-path-desc {
+    font-size: 11px; color: var(--gray); line-height: 1.5;
+  }
+
+  /* Stats row */
+  .sim-stats {
+    background: var(--navy);
+    padding: 32px 40px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .sim-stat { text-align: center; }
+  .sim-stat .num {
+    font-family: var(--font-display);
+    font-size: 32px; color: var(--gold); line-height: 1;
+  }
+  .sim-stat .lbl {
+    font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 6px;
+  }
+
+  /* Partners strip */
+  .sim-partners {
+    padding: 24px 40px;
+    background: white;
+    border-top: 1px solid var(--gray-light);
+  }
+  .sim-partners-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray);
+    margin-bottom: 14px;
+  }
+  .sim-partners-list {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .sim-partner-pill {
+    background: var(--off-white);
+    border: 1px solid var(--gray-light);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 10px; color: var(--navy-mid); font-weight: 500;
+  }
+
+  /* Footer */
+  .sim-footer {
+    background: var(--navy);
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sim-footer-left { font-size: 11px; color: rgba(255,255,255,0.45); }
+  .sim-footer-right { display: flex; gap: 16px; }
+  .sim-footer-link { font-size: 11px; color: rgba(255,255,255,0.5); }
+  .sim-social { display: flex; gap: 10px; align-items: center; }
+  .sim-social-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: white;
+  }
+
+  /* ── ANNOTATION SYSTEM ────────────────────────────────────────── */
+  .annotations {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .annotation {
+    background: white;
+    border-radius: 10px;
+    padding: 18px 20px;
+    border-left: 4px solid var(--gold);
+  }
+  .annotation.design { border-left-color: var(--navy-light); }
+  .annotation.content { border-left-color: var(--green); }
+  .annotation.technical { border-left-color: var(--gray); }
+  .annotation-type {
+    font-size: 9px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .annotation[class*="design"] .annotation-type { color: var(--navy-light); }
+  .annotation[class*="content"] .annotation-type { color: var(--green); }
+  .annotation[class*="technical"] .annotation-type { color: var(--gray); }
+  .annotation h4 { font-size: 13px; color: var(--navy); margin-bottom: 5px; }
+  .annotation p { font-size: 12px; color: var(--gray); line-height: 1.55; }
+
+  .annotations-full {
+    display: flex; flex-direction: column; gap: 12px;
+    margin-top: 24px;
+  }
+  .annotation-row {
+    background: white; border-radius: 10px;
+    padding: 16px 20px;
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 20px; align-items: start;
+    border-left: 4px solid var(--gold);
+  }
+  .annotation-row.design { border-left-color: var(--navy-light); }
+  .annotation-row.content { border-left-color: var(--green); }
+  .annotation-row.bilingual { border-left-color: #8B5CF6; }
+  .annotation-row .ann-label {
+    font-size: 12px; font-weight: 600; color: var(--navy);
+  }
+  .annotation-row .ann-label span {
+    display: block; font-size: 9px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .annotation-row.design .ann-label span { color: var(--navy-light); }
+  .annotation-row.content .ann-label span { color: var(--green); }
+  .annotation-row.bilingual .ann-label span { color: #8B5CF6; }
+  .annotation-row p { font-size: 12px; color: var(--gray); line-height: 1.6; }
+
+  /* ── SECTION DIVIDER ──────────────────────────────────────────── */
+  .section-divider {
+    display: flex; align-items: center; gap: 16px;
+    margin: 40px 0 28px;
+  }
+  .section-divider-line { flex: 1; height: 1px; background: var(--gray-light); }
+  .section-divider-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray);
+    white-space: nowrap;
+  }
+
+  /* ── ABOUT PAGE SPECIFIC ──────────────────────────────────────── */
+  .sim-about-hero {
+    background: linear-gradient(135deg, var(--navy) 60%, var(--navy-mid));
+    padding: 52px 40px;
+  }
+  .sim-about-hero h2 {
+    font-family: var(--font-display);
+    font-size: 34px; color: white; margin-bottom: 14px; line-height: 1.2;
+  }
+  .sim-about-hero h2 em { color: var(--gold); font-style: italic; }
+  .sim-about-hero p {
+    font-size: 13px; color: rgba(255,255,255,0.7); max-width: 500px; line-height: 1.65;
+  }
+
+  .sim-about-body {
+    padding: 36px 40px; background: white;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  }
+  .sim-about-block-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 2px solid var(--gold);
+  }
+  .sim-about-stat-row {
+    display: flex; gap: 12px; margin-bottom: 12px;
+  }
+  .sim-about-stat-box {
+    flex: 1; background: var(--off-white); border-radius: 8px;
+    padding: 16px; text-align: center;
+  }
+  .sim-about-stat-box .n {
+    font-family: var(--font-display);
+    font-size: 28px; color: var(--navy);
+  }
+  .sim-about-stat-box .l {
+    font-size: 10px; color: var(--gray); margin-top: 2px;
+  }
+
+  .sim-working-groups {
+    padding: 32px 40px; background: var(--off-white);
+  }
+  .sim-wg-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    margin-top: 16px;
+  }
+  .sim-wg-item {
+    background: white; border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 11px; font-weight: 600; color: var(--navy);
+    border-left: 3px solid var(--gold);
+  }
+
+  .sim-mission {
+    background: var(--gold);
+    padding: 32px 40px;
+  }
+  .sim-mission-quote {
+    font-family: var(--font-display);
+    font-size: 22px; color: var(--navy);
+    font-style: italic; line-height: 1.4;
+    max-width: 600px;
+  }
+
+  /* ── GET HELP PAGE ────────────────────────────────────────────── */
+  .sim-help-hero {
+    background: var(--red);
+    padding: 40px 40px 32px;
+  }
+  .sim-help-hero h2 {
+    font-family: var(--font-display);
+    font-size: 32px; color: white; margin-bottom: 10px;
+  }
+  .sim-help-hero p {
+    font-size: 13px; color: rgba(255,255,255,0.8); max-width: 500px;
+  }
+
+  .sim-help-hotline {
+    background: var(--gold); padding: 24px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sim-help-hotline-num {
+    font-family: var(--font-display);
+    font-size: 40px; color: var(--navy);
+  }
+  .sim-help-hotline-info {
+    text-align: right;
+  }
+  .sim-help-hotline-info .top {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(11,35,70,0.6);
+  }
+  .sim-help-hotline-info .sub {
+    font-size: 12px; color: var(--navy); margin-top: 4px;
+  }
+
+  .sim-when-to-call {
+    padding: 32px 40px; background: white;
+  }
+  .sim-call-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    margin-top: 16px;
+  }
+  .sim-call-card {
+    border-radius: 10px; overflow: hidden;
+  }
+  .sim-call-card-header {
+    padding: 14px 16px; font-size: 12px; font-weight: 700; color: white;
+  }
+  .sim-call-card:nth-child(1) .sim-call-card-header { background: var(--red); }
+  .sim-call-card:nth-child(2) .sim-call-card-header { background: var(--navy); }
+  .sim-call-card:nth-child(3) .sim-call-card-header { background: var(--navy-light); }
+  .sim-call-card-body {
+    padding: 14px 16px; background: var(--off-white);
+    font-size: 11px; color: var(--gray); line-height: 1.6;
+  }
+
+  .sim-kyr {
+    padding: 32px 40px; background: var(--navy);
+  }
+  .sim-kyr-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+  }
+  .sim-kyr-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  }
+  .sim-kyr-item {
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px; padding: 14px 16px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .sim-kyr-icon { font-size: 18px; }
+  .sim-kyr-text .t { font-size: 12px; font-weight: 700; color: white; margin-bottom: 3px; }
+  .sim-kyr-text .d { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.45; }
+
+  /* ── GET INVOLVED ─────────────────────────────────────────────── */
+  .sim-involved-hero {
+    background: var(--navy-mid);
+    padding: 48px 40px;
+  }
+  .sim-involved-hero h2 {
+    font-family: var(--font-display);
+    font-size: 34px; color: white; margin-bottom: 12px;
+  }
+  .sim-involved-hero h2 em { color: var(--gold); font-style: italic; }
+  .sim-involved-hero p {
+    font-size: 13px; color: rgba(255,255,255,0.7); max-width: 480px;
+  }
+
+  .sim-involved-options {
+    padding: 36px 40px; background: white;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .sim-option-card {
+    border-radius: 12px; overflow: hidden; border: 1px solid var(--gray-light);
+  }
+  .sim-option-header {
+    padding: 18px 20px;
+    font-size: 14px; font-weight: 700; color: white;
+    background: var(--navy);
+  }
+  .sim-option-header.gold { background: var(--gold); color: var(--navy); }
+  .sim-option-header.mid { background: var(--navy-mid); }
+  .sim-option-body {
+    padding: 18px 20px; background: var(--off-white);
+    font-size: 12px; color: var(--gray); line-height: 1.6;
+  }
+  .sim-option-cta {
+    display: block; margin: 10px 0 0;
+    background: var(--navy); color: white;
+    padding: 8px 14px; border-radius: 6px;
+    font-size: 11px; font-weight: 700; text-align: center;
+    width: fit-content;
+  }
+  .sim-option-card:nth-child(1) .sim-option-cta { background: var(--red); }
+  .sim-option-card:nth-child(2) .sim-option-cta { background: var(--gold); color: var(--navy); }
+  .sim-option-card:nth-child(3) .sim-option-cta { background: var(--navy-mid); }
+
+  .sim-events {
+    padding: 32px 40px; background: var(--off-white);
+  }
+  .sim-event-row {
+    background: white; border-radius: 8px;
+    padding: 14px 18px; margin-top: 10px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .sim-event-date {
+    min-width: 52px; text-align: center;
+    background: var(--navy); color: white;
+    border-radius: 8px; padding: 8px;
+  }
+  .sim-event-date .m { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .sim-event-date .d { font-family: var(--font-display); font-size: 22px; line-height: 1; }
+  .sim-event-info .title { font-size: 13px; font-weight: 600; color: var(--navy); }
+  .sim-event-info .sub { font-size: 11px; color: var(--gray); margin-top: 2px; }
+  .sim-event-tag {
+    margin-left: auto;
+    background: var(--gold-light); color: var(--navy);
+    padding: 4px 10px; border-radius: 12px;
+    font-size: 10px; font-weight: 600;
+  }
+
+  .sim-donate {
+    background: var(--gold);
+    padding: 36px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sim-donate h3 {
+    font-family: var(--font-display);
+    font-size: 26px; color: var(--navy);
+  }
+  .sim-donate p { font-size: 13px; color: rgba(11,35,70,0.7); margin-top: 6px; }
+  .sim-donate-btn {
+    background: var(--navy); color: white;
+    padding: 14px 28px; border-radius: 8px;
+    font-size: 14px; font-weight: 700; white-space: nowrap;
+  }
+
+  /* ── PAGE TITLE BLOCKS ────────────────────────────────────────── */
+  .page-title-block {
+    margin-bottom: 28px;
+  }
+  .page-title-block h2 {
+    font-family: var(--font-display);
+    font-size: 30px; color: var(--navy); margin-bottom: 8px;
+  }
+  .page-title-block p { font-size: 14px; color: var(--gray); max-width: 580px; }
+
+  /* ── OVERVIEW CARD ────────────────────────────────────────────── */
+  .overview-card {
+    background: white; border-radius: 12px;
+    padding: 24px; margin-bottom: 24px;
+    border: 1px solid var(--gray-light);
+  }
+  .overview-card h3 {
+    font-size: 15px; font-weight: 700; color: var(--navy);
+    margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--gold);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .overview-rows { display: flex; flex-direction: column; gap: 6px; }
+  .overview-row {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 8px 10px; border-radius: 6px; background: var(--off-white);
+    font-size: 12px;
+  }
+  .overview-row .zone {
+    min-width: 90px; font-weight: 700; color: var(--navy);
+  }
+  .overview-row .desc { color: var(--gray); line-height: 1.5; }
+
+  /* ── BILINGUAL TAG ────────────────────────────────────────────── */
+  .bilingual-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #EDE9FE; color: #5B21B6;
+    padding: 5px 12px; border-radius: 20px;
+    font-size: 11px; font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  /* ── COLOR PALETTE ────────────────────────────────────────────── */
+  .color-system {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .color-swatch {
+    border-radius: 10px; overflow: hidden;
+    width: 100px;
+  }
+  .color-swatch-block { height: 52px; }
+  .color-swatch-info {
+    background: white; padding: 8px 10px;
+    border: 1px solid var(--gray-light); border-top: none;
+    border-radius: 0 0 10px 10px;
+  }
+  .color-swatch-info .name { font-size: 11px; font-weight: 600; color: var(--navy); }
+  .color-swatch-info .hex { font-size: 10px; color: var(--gray); font-family: monospace; }
+
+  /* ── TYPOGRAPHY SPECIMEN ──────────────────────────────────────── */
+  .type-specimen {
+    background: white; border-radius: 12px;
+    padding: 24px; border: 1px solid var(--gray-light);
+    margin-top: 16px;
+  }
+  .type-specimen-row {
+    padding: 14px 0; border-bottom: 1px solid var(--gray-light);
+  }
+  .type-specimen-row:last-child { border-bottom: none; }
+  .type-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 6px; }
+
+
+  /* ── ANNOUNCEMENT BAR ─────────────────────────────────────────── */
+  .sim-announcement-bar {
+    background: var(--gold);
+    padding: 8px 40px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px;
+    font-size: 12px; font-weight: 700; color: var(--navy);
+    text-align: center;
+  }
+  .sim-announcement-bar .ann-num {
+    font-family: var(--font-display);
+    font-size: 16px; color: var(--navy);
+  }
+  .sim-announcement-bar .ann-divider {
+    width: 1px; height: 16px; background: rgba(11,35,70,0.2);
+  }
+
+  /* ── FAQ ──────────────────────────────────────────────────────── */
+  .sim-faq { padding: 32px 40px; background: var(--off-white); }
+  .sim-faq-grid {
+    display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 16px;
+  }
+  .sim-faq-item {
+    background: white; border-radius: 10px; padding: 16px 18px;
+    border-left: 3px solid var(--gold);
+  }
+  .sim-faq-q {
+    font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 6px;
+  }
+  .sim-faq-a { font-size: 11px; color: var(--gray); line-height: 1.55; }
+
+  /* ── DOWNLOADS ────────────────────────────────────────────────── */
+  .sim-downloads { padding: 28px 40px; background: white; }
+  .sim-dl-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 14px;
+  }
+  .sim-dl-card {
+    background: var(--off-white); border-radius: 10px; padding: 16px 18px;
+    border: 1px solid var(--gray-light);
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .sim-dl-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--navy); display: flex; align-items: center;
+    justify-content: center; font-size: 16px; flex-shrink: 0;
+  }
+  .sim-dl-info .title { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .sim-dl-info .sub { font-size: 10px; color: var(--gray); }
+  .sim-dl-info .dl-btn {
+    display: inline-block; margin-top: 8px;
+    background: var(--navy); color: white;
+    padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 700;
+  }
+
+  /* ── INSTAGRAM EMBED ──────────────────────────────────────────── */
+  .sim-instagram { padding: 32px 40px; background: var(--off-white); }
+  .sim-ig-grid {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-top: 14px;
+  }
+  .sim-ig-post {
+    aspect-ratio: 1; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 700;
+  }
+  .sim-ig-post:nth-child(1) { background: var(--navy); color: var(--gold); }
+  .sim-ig-post:nth-child(2) { background: var(--gold); color: var(--navy); }
+  .sim-ig-post:nth-child(3) { background: var(--navy-mid); color: white; }
+  .sim-ig-post:nth-child(4) { background: #D4EDDA; color: var(--navy); }
+  .sim-ig-follow {
+    display: flex; align-items: center; justify-content: space-between; margin-top: 14px;
+  }
+  .sim-ig-handle { font-size: 12px; font-weight: 600; color: var(--navy); }
+  .sim-ig-handle span { font-weight: 400; color: var(--gray); }
+  .sim-ig-btn {
+    background: var(--navy); color: white;
+    padding: 7px 16px; border-radius: 6px; font-size: 11px; font-weight: 700;
+  }
+
+  /* ── CONTACT/MEDIA PAGE ───────────────────────────────────────── */
+  .sim-contact-hero {
+    background: var(--navy-mid); padding: 48px 40px;
+  }
+  .sim-contact-hero h2 {
+    font-family: var(--font-display);
+    font-size: 34px; color: white; margin-bottom: 12px;
+  }
+  .sim-contact-hero h2 em { color: var(--gold); font-style: italic; }
+  .sim-contact-hero p {
+    font-size: 13px; color: rgba(255,255,255,0.7); max-width: 520px; line-height: 1.65;
+  }
+  .sim-contact-warning {
+    background: var(--gold); padding: 14px 40px;
+    font-size: 12px; font-weight: 700; color: var(--navy);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sim-contact-grid {
+    display: grid; grid-template-columns: repeat(2,1fr); gap: 20px;
+    padding: 36px 40px; background: white;
+  }
+  .sim-contact-card {
+    border-radius: 12px; overflow: hidden; border: 1px solid var(--gray-light);
+  }
+  .sim-contact-card-header {
+    background: var(--navy); padding: 16px 20px;
+    font-size: 13px; font-weight: 700; color: white;
+  }
+  .sim-contact-card-header.gold { background: var(--gold); color: var(--navy); }
+  .sim-contact-card-body {
+    padding: 18px 20px; background: var(--off-white);
+    font-size: 12px; color: var(--gray); line-height: 1.7;
+  }
+  .sim-contact-email {
+    display: inline-block; margin-top: 10px;
+    background: var(--navy); color: white;
+    padding: 7px 14px; border-radius: 6px; font-size: 11px; font-weight: 700;
+  }
+  .sim-contact-email.gold-btn { background: var(--gold); color: var(--navy); }
+
+  .sim-presskit {
+    padding: 32px 40px; background: var(--off-white);
+  }
+  .sim-presskit-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 14px;
+  }
+  .sim-presskit-item {
+    background: white; border-radius: 10px; padding: 16px 18px;
+    border-top: 3px solid var(--gold);
+  }
+  .sim-presskit-item .pk-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gray); margin-bottom: 6px;
+  }
+  .sim-presskit-item .pk-value {
+    font-size: 12px; color: var(--navy); font-weight: 600; line-height: 1.5;
+  }
+
+  .sim-spokesperson {
+    padding: 28px 40px; background: white;
+  }
+  .sim-sp-row {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px;
+  }
+  .sim-sp-card {
+    background: var(--navy); border-radius: 10px; padding: 14px 18px;
+    min-width: 180px;
+  }
+  .sim-sp-card .sp-role {
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+  }
+  .sim-sp-card .sp-name {
+    font-size: 13px; font-weight: 700; color: white;
+  }
+  .sim-sp-card .sp-org {
+    font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── DOCUMENT HEADER ───────────────────────────────────────────────── -->
+<div class="doc-header">
+  <div class="label">Website Design Plan</div>
+  <h1>RRN Santa Clara County<br>Website Wireframes</h1>
+  <p>A visual layout plan for the RRN SCC website — covering page structure, content hierarchy, design direction, and bilingual considerations for all six pages.</p>
+  <div class="doc-meta">
+    <div class="doc-meta-item"><div class="key">Pages</div><div class="val">Home · About · Get Help · Get Involved · Updates · Contact & Media</div></div>
+    <div class="doc-meta-item"><div class="key">Languages</div><div class="val">English + Spanish (bilingual)</div></div>
+    <div class="doc-meta-item"><div class="key">Platform</div><div class="val">Squarespace</div></div>
+    <div class="doc-meta-item"><div class="key">Brand Colors</div><div class="val">#F2C422 Gold · #0B2346 Navy · #FFFBB6 Light Gold</div></div>
+  </div>
+</div>
+
+<!-- ── PAGE NAVIGATION ───────────────────────────────────────────────── -->
+<div class="page-nav">
+  <button class="active" onclick="showPage('home')">🏠 Home</button>
+  <button onclick="showPage('about')">ℹ️ About</button>
+  <button onclick="showPage('help')">📞 Get Help</button>
+  <button onclick="showPage('involved')">🤝 Get Involved</button>
+  <button onclick="showPage('contact')">📰 Contact & Media</button>
+  <button onclick="showPage('updates')">📢 Updates</button>
+  <button onclick="showPage('design')">🎨 Design System</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     HOME PAGE
+═══════════════════════════════════════════════════════════════════════ -->
+<div id="home" class="page-section active">
+  <div class="page-title-block">
+    <div class="section-label">📄 Page 1 of 5</div>
+    <h2>Home Page</h2>
+    <p>The homepage needs to do one thing above all else: get someone in an emergency to the hotline number within 3 seconds of landing. Everything else supports that mission.</p>
+  </div>
+
+  <div class="bilingual-badge">🌐 Bilingual note: Language toggle (EN | ES) appears in navbar — switches entire page</div>
+
+  <div class="wireframe">
+    <div class="browser-bar">
+      <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+      <div class="browser-url">sccrrn.org</div>
+    </div>
+
+    <!-- Navbar -->
+    <!-- Announcement bar -->
+    <div class="sim-announcement-bar">
+      <span>📞 Emergency Hotline — available 24/7</span>
+      <div class="ann-divider"></div>
+      <span class="ann-num">408-290-1144</span>
+      <div class="ann-divider"></div>
+      <span>English & Spanish · Free · Confidential</span>
+    </div>
+    <div class="sim-nav">
+      <div class="sim-nav-logo">
+        <div class="sim-logo-circle">RRN</div>
+        <div class="sim-logo-text">Rapid Response Network<br><span>Santa Clara County</span></div>
+      </div>
+      <div class="sim-nav-links">
+        <div class="sim-nav-link">Home</div>
+        <div class="sim-nav-link">About</div>
+        <div class="sim-nav-link">Get Help</div>
+        <div class="sim-nav-link">Get Involved</div>
+        <div class="sim-nav-lang">EN | ES</div>
+        <div class="sim-nav-cta">📞 Call Hotline</div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="sim-hero">
+      <div class="sim-hero-eyebrow">Rapid Response Network · Santa Clara County · Since 2016</div>
+      <h2>Protecting our community from <em>immigration enforcement</em></h2>
+      <p>Free, confidential support — 24 hours a day, 7 days a week. If you see ICE, if someone is detained, or if you have an upcoming check-in — we are here.</p>
+      <div class="sim-hero-btns">
+        <div class="sim-btn-primary">📞 Call Now: 408-290-1144</div>
+        <div class="sim-btn-secondary">Learn how we help →</div>
+      </div>
+    </div>
+
+    <!-- Hotline banner -->
+    <div class="sim-hotline-banner">
+      <div class="sim-hotline-left">
+        <div class="sim-hotline-icon">📞</div>
+        <div class="sim-hotline-text">
+          <div class="top">24/7 Emergency Hotline</div>
+          <div class="num">408-290-1144</div>
+        </div>
+      </div>
+      <div class="sim-hotline-right">
+        Available in English & Spanish<br>Free · Confidential · No documentation required
+      </div>
+    </div>
+
+    <!-- 3 paths -->
+    <div class="sim-paths">
+      <div class="sim-paths-title">How can we help you today?</div>
+      <div class="sim-paths-grid">
+        <div class="sim-path-card">
+          <div class="sim-path-letter">Path A · Call Now</div>
+          <div class="sim-path-title">I see ICE activity in my neighborhood</div>
+          <div class="sim-path-desc">We activate trained responders to verify, document, and monitor. Call the hotline immediately.</div>
+        </div>
+        <div class="sim-path-card">
+          <div class="sim-path-letter">Path B · Call Now</div>
+          <div class="sim-path-title">A loved one has been detained by ICE</div>
+          <div class="sim-path-desc">We connect your family to free emergency legal services and support within hours.</div>
+        </div>
+        <div class="sim-path-card">
+          <div class="sim-path-letter">Path C · Call Now</div>
+          <div class="sim-path-title">I have an upcoming ICE check-in or court date</div>
+          <div class="sim-path-desc">We provide trained volunteers to accompany you so you don't have to go alone.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="sim-stats">
+      <div class="sim-stat"><div class="num">Since '16</div><div class="lbl">Serving SCC communities</div></div>
+      <div class="sim-stat"><div class="num">11</div><div class="lbl">Partner organizations</div></div>
+      <div class="sim-stat"><div class="num">24/7</div><div class="lbl">Hotline availability</div></div>
+      <div class="sim-stat"><div class="num">Free</div><div class="lbl">All services, always</div></div>
+    </div>
+
+
+    <!-- Stay Informed / Social section on Home -->
+    <div style="background:var(--navy);padding:36px 40px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Stay Informed</div>
+          <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:26px;color:white;margin-bottom:12px;line-height:1.3;">Real-time ICE alerts &amp; community updates</h3>
+          <p style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.65;margin-bottom:20px;">We post when ICE activity is confirmed in your area, when a sighting is cleared, and resources on current enforcement trends in Santa Clara County. Follow us — or visit our Updates page.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <div style="background:var(--gold);color:var(--navy);padding:10px 18px;border-radius:7px;font-size:12px;font-weight:700;">📷 Follow on Instagram</div>
+            <div style="background:rgba(255,255,255,0.1);color:white;padding:10px 18px;border-radius:7px;font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,0.2);">👥 Follow on Facebook</div>
+            <div style="background:rgba(255,255,255,0.1);color:white;padding:10px 18px;border-radius:7px;font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,0.2);">📢 See all updates →</div>
+          </div>
+        </div>
+        <div>
+          <div class="sim-ig-grid">
+            <div class="sim-ig-post" style="background:var(--red);">🚨</div>
+            <div class="sim-ig-post" style="background:#1E7E34;color:white;">✅</div>
+            <div class="sim-ig-post" style="background:var(--navy-mid);">📚</div>
+            <div class="sim-ig-post" style="background:var(--gold);color:var(--navy);">📷</div>
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:8px;text-align:center;">Latest from @scc_rapidresponsenetwork</div>
+        </div>
+      </div>
+    </div>
+    <!-- Partners -->
+    <div class="sim-partners">
+      <div class="sim-partners-label">Our partner organizations</div>
+      <div class="sim-partners-list">
+        <div class="sim-partner-pill">Amigos de Guadalupe</div>
+        <div class="sim-partner-pill">Pangea Legal Services</div>
+        <div class="sim-partner-pill">SIREN</div>
+        <div class="sim-partner-pill">CARAS</div>
+        <div class="sim-partner-pill">Catholic Charities</div>
+        <div class="sim-partner-pill">LUNA</div>
+        <div class="sim-partner-pill">Human Agenda</div>
+        <div class="sim-partner-pill">PACT</div>
+        <div class="sim-partner-pill">Pars Equality Center</div>
+        <div class="sim-partner-pill">Asian Law Alliance</div>
+        <div class="sim-partner-pill">Step Forward</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="sim-footer">
+      <div class="sim-footer-left">© 2025 Rapid Response Network Santa Clara County · All services free & confidential</div>
+      <div class="sim-social">
+        <div class="sim-social-icon">📷</div>
+        <div class="sim-social-icon">👥</div>
+      </div>
+      <div class="sim-footer-right">
+        <div class="sim-footer-link"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="741b0100061115171c3407171706061a5a1b0613">[email&#160;protected]</a></div>
+        <div class="sim-footer-link"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abc8c4c6c6dec5c2c8cadfc2c4c5d8ebd8c8c8d9d9c585c4d9cc">[email&#160;protected]</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Annotations -->
+  <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Page Notes & Design Decisions</div><div class="section-divider-line"></div></div>
+  <div class="annotations">
+    <div class="annotation">
+      <div class="annotation-type">Priority</div>
+      <h4>Hotline number above the fold</h4>
+      <p>The number 408-290-1144 appears in 3 places on the homepage: the nav CTA button, the hero, and the gold hotline banner. Someone on a phone in a stressful moment should never have to search for it.</p>
+    </div>
+    <div class="annotation design">
+      <div class="annotation-type">Design</div>
+      <h4>Gold = emergency, Navy = trust</h4>
+      <p>Gold draws the eye to the most urgent actions (hotline, call CTAs). Navy provides authority and stability. The light gold (#FFFBB6) is used for background tints only — too light for text.</p>
+    </div>
+    <div class="annotation content">
+      <div class="annotation-type">Content</div>
+      <h4>3-path cards replace jargon</h4>
+      <p>Instead of listing "services," the three cards ask the visitor what's happening to them right now. Plain language, no immigration jargon. Each card links to the Get Help page.</p>
+    </div>
+    <div class="annotation design">
+      <div class="annotation-type">Bilingual</div>
+      <h4>EN | ES toggle in navbar</h4>
+      <p>Squarespace supports multiple language pages. The toggle in the top nav should be visible at all times — not hidden in a dropdown. Spanish version mirrors the same layout exactly.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     ABOUT PAGE
+═══════════════════════════════════════════════════════════════════════ -->
+<div id="about" class="page-section">
+  <div class="page-title-block">
+    <div class="section-label">📄 Page 2 of 5</div>
+    <h2>About Page</h2>
+    <p>Builds trust and explains the structure of RRN — who we are, who our partners are, and how the system works. Secondary audience: media, funders, partner orgs.</p>
+  </div>
+
+  <div class="wireframe">
+    <div class="browser-bar">
+      <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+      <div class="browser-url">sccrrn.org/about</div>
+    </div>
+
+    <!-- Announcement bar -->
+    <div class="sim-announcement-bar">
+      <span>📞 Emergency Hotline — available 24/7</span>
+      <div class="ann-divider"></div>
+      <span class="ann-num">408-290-1144</span>
+      <div class="ann-divider"></div>
+      <span>English & Spanish · Free · Confidential</span>
+    </div>
+    <div class="sim-nav">
+      <div class="sim-nav-logo">
+        <div class="sim-logo-circle">RRN</div>
+        <div class="sim-logo-text">Rapid Response Network<br><span>Santa Clara County</span></div>
+      </div>
+      <div class="sim-nav-links">
+        <div class="sim-nav-link">Home</div>
+        <div class="sim-nav-link" style="color:var(--gold); font-weight:700;">About</div>
+        <div class="sim-nav-link">Get Help</div>
+        <div class="sim-nav-link">Get Involved</div>
+        <div class="sim-nav-lang">EN | ES</div>
+        <div class="sim-nav-cta">📞 Call Hotline</div>
+      </div>
+    </div>
+
+    <div class="sim-about-hero">
+      <h2>Coordinated community defense<br>since <em>2016</em></h2>
+      <p>RRN SCC is a countywide collaborative of 11 organizations coordinating emergency response services for community members impacted by federal immigration enforcement in Santa Clara County.</p>
+    </div>
+
+    <div class="sim-about-body">
+      <div>
+        <div class="sim-about-block-title">What is SCC RRN?</div>
+        <div class="sim-about-stat-row">
+          <div class="sim-about-stat-box"><div class="n">11</div><div class="l">Partner orgs</div></div>
+          <div class="sim-about-stat-box"><div class="n">5</div><div class="l">Full-time staff</div></div>
+          <div class="sim-about-stat-box"><div class="n">2016</div><div class="l">Founded</div></div>
+        </div>
+        <p style="font-size:12px;color:var(--gray);line-height:1.65;margin-top:12px;">Governed by a Steering Committee with representatives from each partner organization. Partner organizations collectively deliver all RRN services. Five full-time staff coordinate service-area working groups.</p>
+      </div>
+      <div>
+        <div class="sim-about-block-title">How It Works</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:var(--off-white);border-radius:8px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;">
+            <div style="background:var(--navy);color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">1</div>
+            <div style="font-size:12px;color:var(--gray);line-height:1.5;"><strong style="color:var(--navy);">Community calls the 24/7 hotline</strong><br>408-290-1144</div>
+          </div>
+          <div style="background:var(--off-white);border-radius:8px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;">
+            <div style="background:var(--navy);color:white;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">2</div>
+            <div style="font-size:12px;color:var(--gray);line-height:1.5;"><strong style="color:var(--navy);">Dispatcher triages the call</strong><br>Routes to responders, attorneys, or accompaniment volunteers</div>
+          </div>
+          <div style="background:var(--off-white);border-radius:8px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;">
+            <div style="background:var(--gold);color:var(--navy);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">3</div>
+            <div style="font-size:12px;color:var(--gray);line-height:1.5;"><strong style="color:var(--navy);">Community is protected</strong><br>Trained volunteers respond, document, and support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-working-groups">
+      <div class="sim-about-block-title" style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);">Service-Area Working Groups</div>
+      <div class="sim-wg-grid">
+        <div class="sim-wg-item">Outreach & Education</div>
+        <div class="sim-wg-item">Rapid Responders</div>
+        <div class="sim-wg-item">Accompaniment</div>
+        <div class="sim-wg-item">Family Support</div>
+        <div class="sim-wg-item">Legal Services</div>
+        <div class="sim-wg-item">Dispatch</div>
+        <div class="sim-wg-item">Public Communications</div>
+        <div class="sim-wg-item">+ Steering Committee</div>
+      </div>
+    </div>
+
+    <div class="sim-mission">
+      <div class="sim-mission-quote">"Coordinated community defense in response to federal immigration enforcement — because no one should face this alone."</div>
+    </div>
+
+    <div class="sim-partners" style="padding:28px 40px;">
+      <div class="sim-partners-label">Partner Organizations</div>
+      <div class="sim-partners-list">
+        <div class="sim-partner-pill">Amigos de Guadalupe</div>
+        <div class="sim-partner-pill">Pangea Legal Services</div>
+        <div class="sim-partner-pill">SIREN</div>
+        <div class="sim-partner-pill">CARAS</div>
+        <div class="sim-partner-pill">Catholic Charities of SCC</div>
+        <div class="sim-partner-pill">LUNA</div>
+        <div class="sim-partner-pill">Human Agenda</div>
+        <div class="sim-partner-pill">PACT</div>
+        <div class="sim-partner-pill">Pars Equality Center</div>
+        <div class="sim-partner-pill">Asian Law Alliance</div>
+        <div class="sim-partner-pill">Step Forward Foundation</div>
+      </div>
+    </div>
+
+    <div class="sim-footer">
+      <div class="sim-footer-left">© 2025 RRN Santa Clara County</div>
+      <div class="sim-social"><div class="sim-social-icon">📷</div><div class="sim-social-icon">👥</div></div>
+      <div class="sim-footer-right"><div class="sim-footer-link"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d5e5250504853545e5c495452534e7d4e5e5e4f4f5313524f5a">[email&#160;protected]</a></div></div>
+    </div>
+  </div>
+
+  <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Page Notes</div><div class="section-divider-line"></div></div>
+  <div class="annotations">
+    <div class="annotation content">
+      <div class="annotation-type">Content</div>
+      <h4>Lead with story, not structure</h4>
+      <p>The hero uses the "since 2016" detail to build credibility immediately. Avoid org-chart language up top — the 3-stat row (11 partners, 5 staff, 2016) communicates scale quickly and visually.</p>
+    </div>
+    <div class="annotation design">
+      <div class="annotation-type">Design</div>
+      <h4>Gold quote pull on dark background</h4>
+      <p>The mission statement section uses the gold background with large serif italic text — a visually memorable moment that breaks the otherwise structured layout. Pairs well with the logo.</p>
+    </div>
+    <div class="annotation content">
+      <div class="annotation-type">Content</div>
+      <h4>Partner logos (when available)</h4>
+      <p>The partner pills are placeholders. If partner org logos are available, replace the pills with a logo grid. This builds credibility especially for media and funder visitors.</p>
+    </div>
+    <div class="annotation design">
+      <div class="annotation-type">Bilingual</div>
+      <h4>Spanish About page</h4>
+      <p>The About page content is relatively stable — great candidate for a fully translated /es/about page in Squarespace. Keep the same layout, swap text only.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     GET HELP PAGE
+═══════════════════════════════════════════════════════════════════════ -->
+<div id="help" class="page-section">
+  <div class="page-title-block">
+    <div class="section-label">📄 Page 3 of 5</div>
+    <h2>Get Help Page</h2>
+    <p>The most critical page for community members in crisis. Should load fast, be readable on a phone, and put the hotline number front and center before anything else.</p>
+  </div>
+
+  <div class="bilingual-badge">🌐 Bilingual priority: This page should be the FIRST translated. Most urgent visitors are Spanish-speaking.</div>
+
+  <div class="wireframe">
+    <div class="browser-bar">
+      <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+      <div class="browser-url">sccrrn.org/get-help</div>
+    </div>
+
+    <!-- Announcement bar -->
+    <div class="sim-announcement-bar">
+      <span>📞 Emergency Hotline — available 24/7</span>
+      <div class="ann-divider"></div>
+      <span class="ann-num">408-290-1144</span>
+      <div class="ann-divider"></div>
+      <span>English & Spanish · Free · Confidential</span>
+    </div>
+    <div class="sim-nav">
+      <div class="sim-nav-logo">
+        <div class="sim-logo-circle">RRN</div>
+        <div class="sim-logo-text">Rapid Response Network<br><span>Santa Clara County</span></div>
+      </div>
+      <div class="sim-nav-links">
+        <div class="sim-nav-link">Home</div>
+        <div class="sim-nav-link">About</div>
+        <div class="sim-nav-link" style="color:var(--gold);font-weight:700;">Get Help</div>
+        <div class="sim-nav-link">Get Involved</div>
+        <div class="sim-nav-lang">EN | ES</div>
+        <div class="sim-nav-cta">📞 Call Hotline</div>
+      </div>
+    </div>
+
+    <div class="sim-help-hero">
+      <h2>We're here to help — call us now</h2>
+      <p>Our hotline is free, confidential, and available 24 hours a day. You do not need documentation to call. We speak English and Spanish.</p>
+    </div>
+
+    <div class="sim-help-hotline">
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(11,35,70,0.6);margin-bottom:4px;">24/7 Emergency Hotline</div>
+        <div class="sim-help-hotline-num">408-290-1144</div>
+      </div>
+      <div class="sim-help-hotline-info">
+        <div class="top">Available in English & Spanish</div>
+        <div class="sub">Free · Confidential · No documentation required<br>Call or text anytime</div>
+      </div>
+    </div>
+
+    <div class="sim-when-to-call">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:4px;">When should I call?</div>
+      <div class="sim-call-grid">
+        <div class="sim-call-card">
+          <div class="sim-call-card-header">🚨 ICE Activity Nearby</div>
+          <div class="sim-call-card-body">You see immigration agents on the street, at a home or business, or received a report of activity. Call immediately — we deploy trained community observers.</div>
+        </div>
+        <div class="sim-call-card">
+          <div class="sim-call-card-header">⚖️ Someone Was Detained</div>
+          <div class="sim-call-card-body">A loved one has been arrested or detained by ICE. We connect your family to free emergency legal services within hours — same day if the arrest just happened.</div>
+        </div>
+        <div class="sim-call-card">
+          <div class="sim-call-card-header">📅 Upcoming Check-In or Court</div>
+          <div class="sim-call-card-body">You or a loved one has an upcoming ICE check-in, ISAP appointment, or immigration court date. We send trained volunteers to accompany you. You won't go alone.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-kyr">
+      <div class="sim-kyr-title">Know Your Rights — Share this with your family</div>
+      <div class="sim-kyr-grid">
+        <div class="sim-kyr-item">
+          <div class="sim-kyr-icon">🚪</div>
+          <div class="sim-kyr-text">
+            <div class="t">Do not open the door</div>
+            <div class="d">You are not required to let agents in without a warrant signed by a judge.</div>
+          </div>
+        </div>
+        <div class="sim-kyr-item">
+          <div class="sim-kyr-icon">🤐</div>
+          <div class="sim-kyr-text">
+            <div class="t">You have the right to remain silent</div>
+            <div class="d">Do not answer questions about your immigration status or country of origin.</div>
+          </div>
+        </div>
+        <div class="sim-kyr-item">
+          <div class="sim-kyr-icon">✍️</div>
+          <div class="sim-kyr-text">
+            <div class="t">Do not sign anything</div>
+            <div class="d">You have the right to speak with an attorney before signing any documents.</div>
+          </div>
+        </div>
+        <div class="sim-kyr-item">
+          <div class="sim-kyr-icon">🚶</div>
+          <div class="sim-kyr-text">
+            <div class="t">If you're outside, ask "Am I free to go?"</div>
+            <div class="d">If yes, leave calmly. You don't have to answer questions outside your home either.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:white;padding:28px 40px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:16px;">Other Resources</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+        <div style="background:var(--off-white);border-radius:8px;padding:14px 16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Immigration Legal Services</div>
+          <div style="font-size:11px;color:var(--gray);line-height:1.5;">Free and low-cost legal help for non-emergency immigration needs. → Nonprofit referral list (PDF)</div>
+        </div>
+        <div style="background:var(--off-white);border-radius:8px;padding:14px 16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Bay Area RRN Network</div>
+          <div style="font-size:11px;color:var(--gray);line-height:1.5;">Outside Santa Clara County? Find your local rapid response network. → ccijustice.org/carrn</div>
+        </div>
+        <div style="background:var(--off-white);border-radius:8px;padding:14px 16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">211 Santa Clara</div>
+          <div style="font-size:11px;color:var(--gray);line-height:1.5;">For non-immigration social services needs — housing, food, health, and more. → Dial 2-1-1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-footer">
+      <div class="sim-footer-left">© 2025 RRN Santa Clara County</div>
+      <div class="sim-social"><div class="sim-social-icon">📷</div><div class="sim-social-icon">👥</div></div>
+      <div class="sim-footer-right"><div class="sim-footer-link"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="06697372746367656e4675656574746828697461">[email&#160;protected]</a></div></div>
+    </div>
+  </div>
+
+  <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Page Notes</div><div class="section-divider-line"></div></div>
+  <div class="annotations">
+    <div class="annotation">
+      <div class="annotation-type">Priority</div>
+      <h4>Red hero = urgency signal</h4>
+      <p>This is the only page that uses red as the hero background. It signals urgency without being alarming — people landing here are already in a stressful situation and need to feel they're in the right place fast.</p>
+    </div>
+    <div class="annotation content">
+      <div class="annotation-type">Bilingual — Highest Priority</div>
+      <h4>Translate this page first</h4>
+      <p>The Spanish version of Get Help should be the very first thing built. The /es/obtener-ayuda page should be identical in layout. Consider making the default language detection route Spanish-speaking users here automatically.</p>
+    </div>
+    <div class="annotation design">
+      <div class="annotation-type">Mobile</div>
+      <h4>Phone number as tappable link</h4>
+      <p>On mobile, the hotline number must be an &lt;a href="tel:4082901144"&gt; link so it opens the dialer immediately. On Squarespace this is set in the button/link settings — do not use plain text for the number.</p>
+    </div>
+    <div class="annotation content">
+      <div class="annotation-type">Content</div>
+      <h4>KYR section is shareable</h4>
+      <p>Consider adding a "Share this page" button below the KYR section, or a downloadable KYR card PDF. Community members often want to forward this to family members who may not speak English.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     GET INVOLVED PAGE
+═══════════════════════════════════════════════════════════════════════ -->
+<div id="involved" class="page-section">
+  <div class="page-title-block">
+    <div class="section-label">📄 Page 4 of 6</div>
+    <h2>Get Involved Page</h2>
+    <p>For people who want to give their time or money. Focused entirely on action — volunteering, hosting, and donating. No professional inquiries here (those live on Contact & Media).</p>
+  </div>
+
+  <div class="wireframe">
+    <div class="browser-bar">
+      <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+      <div class="browser-url">sccrrn.org/get-involved</div>
+    </div>
+
+    <div class="sim-announcement-bar">
+      <span>📞 Emergency Hotline — available 24/7</span>
+      <div class="ann-divider"></div>
+      <span class="ann-num">408-290-1144</span>
+      <div class="ann-divider"></div>
+      <span>English & Spanish · Free · Confidential</span>
+    </div>
+
+    <div class="sim-nav">
+      <div class="sim-nav-logo">
+        <div class="sim-logo-circle">RRN</div>
+        <div class="sim-logo-text">Rapid Response Network<br><span>Santa Clara County</span></div>
+      </div>
+      <div class="sim-nav-links">
+        <div class="sim-nav-link">Home</div>
+        <div class="sim-nav-link">About</div>
+        <div class="sim-nav-link">Get Help</div>
+        <div class="sim-nav-link" style="color:var(--gold);font-weight:700;">Get Involved</div>
+        <div class="sim-nav-link">Updates</div>
+        <div class="sim-nav-lang">EN | ES</div>
+        <div class="sim-nav-cta">📞 Call Hotline</div>
+      </div>
+    </div>
+
+    <div class="sim-involved-hero">
+      <h2>Join us. Our community<br>is stronger <em>together.</em></h2>
+      <p>Whether you want to volunteer on the front lines, bring a training to your community, or support the network financially — there is a place for you here.</p>
+    </div>
+
+    <!-- 2-card layout: Rapid Responder + KYR Workshop -->
+    <div style="padding:36px 40px;background:white;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:16px;">Ways to Volunteer</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+        <div class="sim-option-card">
+          <div class="sim-option-header">🏃 Become a Rapid Responder</div>
+          <div class="sim-option-body">
+            Attend a free Rapid Responder training and join the network of community volunteers who monitor and document ICE activity in real time.
+            <br><br>
+            <strong style="color:var(--navy);">What you'll do:</strong> Respond to ICE alerts in your area, observe and document activity, and keep the community informed.
+            <br><br>
+            Open to all Santa Clara County community members. No experience required. Training is free and takes about 3 hours.
+            <div class="sim-option-cta" style="background:var(--red);">Sign up for a training →</div>
+          </div>
+        </div>
+
+        <div class="sim-option-card">
+          <div class="sim-option-header gold">📚 Host a Workshop at Your Organization</div>
+          <div class="sim-option-body">
+            Bring RRN to your community. We offer two types of free workshops:
+            <br><br>
+            <strong style="color:var(--navy);">Know Your Rights Training</strong> — for community members and families. We come to you.
+            <br><br>
+            <strong style="color:var(--navy);">RRN Informational Workshop</strong> — for organizations, churches, schools, and businesses that work with impacted communities.
+            <br><br>
+            Both are free, bilingual, and available countywide.
+            <div class="sim-option-cta" style="background:var(--gold);color:var(--navy);">Request a workshop → outreach@sccrrn.org</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Events -->
+    <div class="sim-events">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:4px;">Upcoming Trainings & Events</div>
+      <div class="sim-event-row">
+        <div class="sim-event-date"><div class="m">MAR</div><div class="d">22</div></div>
+        <div class="sim-event-info">
+          <div class="title">Rapid Responder Training — San Jose</div>
+          <div class="sub">East Side Union High School District · 10am–1pm · Free · Bilingual</div>
+        </div>
+        <div class="sim-event-tag">Rapid Responder</div>
+      </div>
+      <div class="sim-event-row">
+        <div class="sim-event-date"><div class="m">APR</div><div class="d">5</div></div>
+        <div class="sim-event-info">
+          <div class="title">Know Your Rights Workshop — Santa Clara</div>
+          <div class="sub">YWCA Silicon Valley · 6pm–8pm · Free · Spanish</div>
+        </div>
+        <div class="sim-event-tag">KYR</div>
+      </div>
+      <div class="sim-event-row">
+        <div class="sim-event-date"><div class="m">APR</div><div class="d">19</div></div>
+        <div class="sim-event-info">
+          <div class="title">Rapid Responder Training — Sunnyvale</div>
+          <div class="sub">Sunnyvale Community Center · 9am–12pm · Free · Bilingual</div>
+        </div>
+        <div class="sim-event-tag">Rapid Responder</div>
+      </div>
+      <div style="text-align:center;margin-top:16px;">
+        <div style="display:inline-block;background:var(--navy);color:white;padding:9px 20px;border-radius:6px;font-size:12px;font-weight:700;">View all events →</div>
+      </div>
+    </div>
+
+    <!-- Donate — full width, prominent -->
+    <div class="sim-donate">
+      <div>
+        <h3>Support our work</h3>
+        <p>Your donation keeps the hotline running 24/7, funds free legal services for detained community members, and supports families in crisis. Every dollar goes directly to community defense.</p>
+        <p style="font-size:11px;margin-top:8px;color:rgba(11,35,70,0.6);">RRN SCC is fiscally sponsored. All donations are tax-deductible.</p>
+      </div>
+      <div class="sim-donate-btn">Donate →</div>
+    </div>
+
+    <div class="sim-footer">
+      <div class="sim-footer-left">© 2025 RRN Santa Clara County</div>
+      <div class="sim-footer-right">
+        <div class="sim-footer-link">outreach@sccrrn.org — workshops & volunteering</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Page Notes</div><div class="section-divider-line"></div></div>
+  <div class="annotations">
+    <div class="annotation content">
+      <div class="annotation-type">Content</div>
+      <h4>Two volunteer paths, not three</h4>
+      <p>The previous version had three cards including a Donate card. Donate is now its own full-width section at the bottom — more prominent and less competing with the volunteer CTAs. Volunteering and donating feel like different decisions; they deserve different visual weight.</p>
+    </div>
+    <div class="annotation design">
+      <div class="annotation-type">Design</div>
+      <h4>outreach@ lives here exclusively</h4>
+      <p>outreach@sccrrn.org now appears only on this page (for workshop requests and volunteer questions). It's been removed from Contact & Media to eliminate confusion about which email to use.</p>
+    </div>
+    <div class="annotation content">
+      <div class="annotation-type">Content</div>
+      <h4>Events block = easy staff updates</h4>
+      <p>Use Squarespace's native Events page type. Staff can add, edit, and remove events without touching any other part of the site. Each event should include date, time, location, language, and a registration link or contact email.</p>
+    </div>
+    <div class="annotation">
+      <div class="annotation-type">Note</div>
+      <h4>No social media links here</h4>
+      <p>Social follows have been removed from this page. They now live exclusively on the Home "Stay Informed" section and the Updates page, where they have clear context and purpose.</p>
+    </div>
+  </div>
+</div>
+
+<div id="contact" class="page-section">
+  <div class="page-title-block">
+    <div class="section-label">📄 Page 5 of 6</div>
+    <h2>Contact & Media Page</h2>
+    <p>For journalists, partner organizations, and professional inquiries only. Clear purpose: get the right person to the right email, and give media everything they need without a phone call.</p>
+  </div>
+
+  <div class="wireframe">
+    <div class="browser-bar">
+      <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+      <div class="browser-url">sccrrn.org/contact</div>
+    </div>
+
+    <div class="sim-announcement-bar">
+      <span>📞 Emergency Hotline — available 24/7</span>
+      <div class="ann-divider"></div>
+      <span class="ann-num">408-290-1144</span>
+      <div class="ann-divider"></div>
+      <span>English & Spanish · Free · Confidential</span>
+    </div>
+
+    <div class="sim-nav">
+      <div class="sim-nav-logo">
+        <div class="sim-logo-circle">RRN</div>
+        <div class="sim-logo-text">Rapid Response Network<br><span>Santa Clara County</span></div>
+      </div>
+      <div class="sim-nav-links">
+        <div class="sim-nav-link">Home</div>
+        <div class="sim-nav-link">About</div>
+        <div class="sim-nav-link">Get Help</div>
+        <div class="sim-nav-link">Get Involved</div>
+        <div class="sim-nav-link">Updates</div>
+        <div class="sim-nav-lang">EN | ES</div>
+        <div class="sim-nav-cta">📞 Call Hotline</div>
+      </div>
+    </div>
+
+    <div class="sim-contact-hero">
+      <h2>Contact <em>the right person</em></h2>
+      <p>RRN has two public contact emails — one for media and one for outreach. Use the guide below to make sure your message reaches the right team.</p>
+    </div>
+
+    <!-- Critical warning bar -->
+    <div class="sim-contact-warning">
+      ⚠️  For immigration emergencies: call the hotline at 408-290-1144. Do not email for urgent situations — email is not monitored 24/7.
+    </div>
+
+    <!-- 2-column contact routing — clean, no donation, no social -->
+    <div class="sim-contact-grid">
+
+      <div class="sim-contact-card">
+        <div class="sim-contact-card-header">📰 Media & Press</div>
+        <div class="sim-contact-card-body">
+          For journalists, reporters, and media organizations requesting interviews, statements, background information, quotes, or data about RRN's work or ICE activity in Santa Clara County.
+          <br><br>
+          <strong style="color:var(--navy);">Response time:</strong> Within 24 hours on business days.<br>
+          <strong style="color:var(--navy);">Please include:</strong> Your name, outlet, deadline, and story description.
+          <br>
+          <div class="sim-contact-email">communications@sccrrn.org →</div>
+        </div>
+      </div>
+
+      <div class="sim-contact-card">
+        <div class="sim-contact-card-header gold">🤝 Organizational Partnerships</div>
+        <div class="sim-contact-card-body">
+          For organizations — nonprofits, government agencies, employers, schools, faith communities — interested in formally partnering with RRN, co-sponsoring events, or integrating RRN services into your work.
+          <br><br>
+          <strong style="color:var(--navy);">Note:</strong> To request a workshop or volunteer training for your org, use the Get Involved page instead.
+          <br>
+          <div class="sim-contact-email gold-btn">outreach@sccrrn.org →</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Press Kit — clean and complete -->
+    <div class="sim-presskit">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);">Press Kit — Key Facts for Media</div>
+      <div class="sim-presskit-grid">
+        <div class="sim-presskit-item">
+          <div class="pk-label">One-line description</div>
+          <div class="pk-value">RRN SCC is a countywide coalition of 11 organizations providing 24/7 emergency response to federal immigration enforcement in Santa Clara County since 2016.</div>
+        </div>
+        <div class="sim-presskit-item">
+          <div class="pk-label">Services</div>
+          <div class="pk-value">24/7 hotline · Free emergency legal services · ICE activity monitoring & documentation · Accompaniment to check-ins & court · Family support</div>
+        </div>
+        <div class="sim-presskit-item">
+          <div class="pk-label">Key numbers</div>
+          <div class="pk-value">11 partner orgs · 5 full-time staff · Operating since 2016 · Serving all of Santa Clara County</div>
+        </div>
+        <div class="sim-presskit-item">
+          <div class="pk-label">Partner organizations</div>
+          <div class="pk-value">Amigos de Guadalupe · Pangea Legal · SIREN · CARAS · Catholic Charities · LUNA · Human Agenda · PACT · Pars Equality Center · Asian Law Alliance · Step Forward</div>
+        </div>
+        <div class="sim-presskit-item">
+          <div class="pk-label">Hotline</div>
+          <div class="pk-value">408-290-1144 · 24/7 · English & Spanish · Free & confidential</div>
+        </div>
+        <div class="sim-presskit-item">
+          <div class="pk-label">Downloads</div>
+          <div class="pk-value" style="display:flex;flex-direction:column;gap:6px;">
+            <span style="background:var(--navy);color:white;padding:4px 10px;border-radius:4px;font-size:10px;font-weight:700;display:inline-block;width:fit-content;">⬇ Logo (PNG)</span>
+            <span style="background:var(--navy);color:white;padding:4px 10px;border-radius:4px;font-size:10px;font-weight:700;display:inline-block;width:fit-content;">⬇ One-page fact sheet</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spokespeople -->
+    <div class="sim-spokesperson">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);">Media Contacts</div>
+      <p style="font-size:12px;color:var(--gray);margin-top:8px;margin-bottom:0;">Available for interviews and on-the-record statements. Reach all via <strong>communications@sccrrn.org</strong></p>
+      <div class="sim-sp-row">
+        <div class="sim-sp-card">
+          <div class="sp-role">Network Coordinator</div>
+          <div class="sp-name">[Name]</div>
+          <div class="sp-org">Amigos de Guadalupe</div>
+        </div>
+        <div class="sim-sp-card">
+          <div class="sp-role">Legal Services Lead</div>
+          <div class="sp-name">[Name]</div>
+          <div class="sp-org">Pangea Legal Services</div>
+        </div>
+        <div class="sim-sp-card">
+          <div class="sp-role">Community Outreach</div>
+          <div class="sp-name">[Name]</div>
+          <div class="sp-org">SIREN</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-footer">
+      <div class="sim-footer-left">© 2025 RRN Santa Clara County · All services free & confidential</div>
+      <div class="sim-footer-right">
+        <div class="sim-footer-link">communications@sccrrn.org — press & partnerships</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Page Notes</div><div class="section-divider-line"></div></div>
+  <div class="annotations">
+    <div class="annotation">
+      <div class="annotation-type">Priority</div>
+      <h4>Donation removed — no overlap</h4>
+      <p>Donation now lives only on Get Involved. Contact & Media is entirely about professional routing — journalists, partners, spokespeople. The two pages now have completely distinct purposes.</p>
+    </div>
+    <div class="annotation content">
+      <div class="annotation-type">Content</div>
+      <h4>Two contact cards, not four</h4>
+      <p>Reduced from four cards (media, partnerships, donations, general) to two clean ones. The "general questions" card was filler — anyone with a genuine question maps to one of the two emails. Simpler is more trustworthy.</p>
+    </div>
+    <div class="annotation design">
+      <div class="annotation-type">Design</div>
+      <h4>No social links here</h4>
+      <p>Social follow buttons removed. Social media belongs on the Home "Stay Informed" section and the Updates page — where they're contextual and purposeful, not decorative filler.</p>
+    </div>
+    <div class="annotation content">
+      <div class="annotation-type">Content</div>
+      <h4>Fill in spokesperson names</h4>
+      <p>Replace [Name] placeholders with actual authorized spokespeople before publishing. Confirm with each person they're comfortable being listed publicly. Keep this updated as staff changes.</p>
+    </div>
+  </div>
+</div>
+
+<div id="updates" class="page-section">
+  <div class="page-title-block">
+    <div class="section-label">📄 Page 6 of 6 — New Page</div>
+    <h2>Community Updates Page</h2>
+    <p>A dedicated hub for real-time ICE alerts, confirmed activity, cleared sightings, and educational resources about current enforcement trends in Santa Clara County. No login needed — public and shareable.</p>
+  </div>
+
+  <div class="bilingual-badge">🌐 Bilingual priority: High — community members and families are the primary audience</div>
+
+  <div class="wireframe">
+    <div class="browser-bar">
+      <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+      <div class="browser-url">sccrrn.org/updates</div>
+    </div>
+
+    <div class="sim-announcement-bar">
+      <span>📞 Emergency Hotline — available 24/7</span>
+      <div class="ann-divider"></div>
+      <span class="ann-num">408-290-1144</span>
+      <div class="ann-divider"></div>
+      <span>English & Spanish · Free · Confidential</span>
+    </div>
+
+    <div class="sim-nav">
+      <div class="sim-nav-logo">
+        <div class="sim-logo-circle">RRN</div>
+        <div class="sim-logo-text">Rapid Response Network<br><span>Santa Clara County</span></div>
+      </div>
+      <div class="sim-nav-links">
+        <div class="sim-nav-link">Home</div>
+        <div class="sim-nav-link">About</div>
+        <div class="sim-nav-link">Get Help</div>
+        <div class="sim-nav-link">Get Involved</div>
+        <div class="sim-nav-link" style="color:var(--gold);font-weight:700;">Updates</div>
+        <div class="sim-nav-lang">EN | ES</div>
+        <div class="sim-nav-cta">📞 Call Hotline</div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div style="background:var(--navy);padding:44px 40px 36px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-40px;top:-40px;width:240px;height:240px;border-radius:50%;background:var(--gold);opacity:0.05;"></div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Santa Clara County · Real-Time</div>
+      <h2 style="font-family:'DM Serif Display',Georgia,serif;font-size:34px;color:white;margin-bottom:12px;line-height:1.2;">Community Updates &amp;<br>ICE Activity Alerts</h2>
+      <p style="font-size:13px;color:rgba(255,255,255,0.7);max-width:520px;line-height:1.65;">We post updates when ICE activity is confirmed, when a sighting is cleared, and regular resources on current enforcement trends and tactics in Santa Clara County. Follow us to stay informed.</p>
+      <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+        <div style="background:var(--gold);color:var(--navy);padding:10px 18px;border-radius:7px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:8px;">📷 Follow on Instagram</div>
+        <div style="background:rgba(255,255,255,0.1);color:white;padding:10px 18px;border-radius:7px;font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,0.2);">👥 Follow on Facebook</div>
+      </div>
+    </div>
+
+    <!-- What we post explainer -->
+    <div style="background:var(--gold);padding:20px 40px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(11,35,70,0.6);margin-bottom:12px;">What we post and why</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div style="background:white;border-radius:8px;padding:14px 16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:5px;">🚨 ICE Activity Confirmed</div>
+          <div style="font-size:11px;color:var(--gray);line-height:1.5;">When responders verify ICE enforcement is happening. Includes general area — no specific addresses that could endanger community members.</div>
+        </div>
+        <div style="background:white;border-radius:8px;padding:14px 16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:5px;">✅ Sighting Cleared / Not ICE</div>
+          <div style="font-size:11px;color:var(--gray);line-height:1.5;">When a reported sighting is investigated and NOT confirmed as ICE. Posted to stop misinformation and prevent unnecessary panic in the community.</div>
+        </div>
+        <div style="background:white;border-radius:8px;padding:14px 16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:5px;">📚 Resources & Education</div>
+          <div style="font-size:11px;color:var(--gray);line-height:1.5;">Information about current ICE tactics, trends, and patterns in SCC. Know Your Rights reminders. Policy updates affecting local immigrant communities.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent updates feed (simulated) -->
+    <div style="padding:32px 40px;background:white;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:16px;">Recent Updates</div>
+
+      <!-- Confirmed activity post -->
+      <div style="border:1px solid var(--gray-light);border-radius:10px;overflow:hidden;margin-bottom:12px;">
+        <div style="background:var(--red);padding:10px 18px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:11px;font-weight:700;color:white;">🚨 ICE ACTIVITY CONFIRMED</span>
+          <span style="margin-left:auto;font-size:10px;color:rgba(255,255,255,0.7);">March 10, 2025 · 8:42am</span>
+        </div>
+        <div style="padding:16px 18px;background:var(--off-white);font-size:12px;color:var(--gray);line-height:1.6;">
+          RRN has confirmed ICE enforcement activity in <strong style="color:var(--navy);">East San Jose</strong> this morning. Responders are on site monitoring the situation. If you are in the area, remain calm and remember your rights. Call our hotline if you need support: <strong style="color:var(--navy);">408-290-1144</strong>.
+          <div style="margin-top:10px;display:flex;gap:8px;">
+            <span style="background:white;border:1px solid var(--gray-light);padding:4px 10px;border-radius:12px;font-size:10px;font-weight:600;color:var(--navy);">East San Jose</span>
+            <span style="background:white;border:1px solid var(--gray-light);padding:4px 10px;border-radius:12px;font-size:10px;font-weight:600;color:var(--navy);">Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cleared sighting post -->
+      <div style="border:1px solid var(--gray-light);border-radius:10px;overflow:hidden;margin-bottom:12px;">
+        <div style="background:var(--green);padding:10px 18px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:11px;font-weight:700;color:white;">✅ SIGHTING CLEARED — NOT ICE</span>
+          <span style="margin-left:auto;font-size:10px;color:rgba(255,255,255,0.8);">March 8, 2025 · 2:15pm</span>
+        </div>
+        <div style="padding:16px 18px;background:var(--off-white);font-size:12px;color:var(--gray);line-height:1.6;">
+          RRN received multiple reports of uniformed activity near <strong style="color:var(--navy);">Downtown San Jose</strong>. Our responders investigated and confirmed this was <strong style="color:var(--navy);">local law enforcement, not ICE</strong>. There is no immigration enforcement activity in this area. Thank you to everyone who called to report.
+          <div style="margin-top:10px;display:flex;gap:8px;">
+            <span style="background:white;border:1px solid var(--gray-light);padding:4px 10px;border-radius:12px;font-size:10px;font-weight:600;color:var(--navy);">Downtown SJ</span>
+            <span style="background:white;border:1px solid #D4EDDA;padding:4px 10px;border-radius:12px;font-size:10px;font-weight:600;color:var(--green);">Cleared</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resource post -->
+      <div style="border:1px solid var(--gray-light);border-radius:10px;overflow:hidden;margin-bottom:12px;">
+        <div style="background:var(--navy-mid);padding:10px 18px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:11px;font-weight:700;color:white;">📚 RESOURCE</span>
+          <span style="margin-left:auto;font-size:10px;color:rgba(255,255,255,0.7);">March 5, 2025</span>
+        </div>
+        <div style="padding:16px 18px;background:var(--off-white);font-size:12px;color:var(--gray);line-height:1.6;">
+          <strong style="color:var(--navy);">What to do if ICE comes to your workplace:</strong> Recent enforcement has included worksite operations in Santa Clara County. Know your rights as a worker — you have the same constitutional rights at work as you do at home. <a href="#" style="color:var(--navy-light);font-weight:600;">Read more →</a>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:6px;">
+        <div style="display:inline-block;border:1px solid var(--gray-light);color:var(--navy);padding:8px 20px;border-radius:6px;font-size:12px;font-weight:600;">Load more updates ↓</div>
+      </div>
+    </div>
+
+    <!-- Instagram feed embed -->
+    <div class="sim-instagram" style="background:var(--off-white);">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:4px;">Follow for real-time updates</div>
+      <div class="sim-ig-grid">
+        <div class="sim-ig-post">📷</div>
+        <div class="sim-ig-post">🚨</div>
+        <div class="sim-ig-post">✅</div>
+        <div class="sim-ig-post">📚</div>
+      </div>
+      <div class="sim-ig-follow">
+        <div>
+          <div class="sim-ig-handle">@scc_rapidresponsenetwork <span>Instagram</span></div>
+          <div style="font-size:11px;color:var(--gray);margin-top:2px;">facebook.com/RRNSCC <span style="color:var(--gray);">Facebook</span></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <div class="sim-ig-btn">📷 Follow on Instagram</div>
+          <div class="sim-ig-btn" style="background:var(--navy-mid);">👥 Follow on Facebook</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-footer">
+      <div class="sim-footer-left">© 2025 RRN Santa Clara County · All services free & confidential</div>
+      <div class="sim-footer-right">
+        <div class="sim-footer-link">408-290-1144 · Emergency Hotline</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-label">Page Notes</div><div class="section-divider-line"></div></div>
+  <div class="annotations">
+    <div class="annotation">
+      <div class="annotation-type">Priority</div>
+      <h4>How to maintain the updates feed</h4>
+      <p>The updates feed can be built two ways in Squarespace: (1) Use the Blog page type — each post is a blog entry with a category tag (Confirmed / Cleared / Resource). Easy to update, searchable, and automatically ordered by date. (2) Embed your Instagram feed directly. Option 1 is more flexible and bilingual-friendly. Option 2 requires zero extra effort since you're already posting to Instagram.</p>
+    </div>
+    <div class="annotation content">
+      <div class="annotation-type">Content</div>
+      <h4>What NOT to post</h4>
+      <p>Never post specific home addresses, names of individuals detained, photos of community members, or real-time location data that could be used by ICE to identify targets. General area (neighborhood or city) is the right level of detail. This is consistent with your operational manual's community communication policy.</p>
+    </div>
+    <div class="annotation design">
+      <div class="annotation-type">Bilingual</div>
+      <h4>Spanish Updates page is essential</h4>
+      <p>This page alongside Get Help should be the first two translated. Community members who most need this information are most likely to be Spanish-speaking. A simple /es/actualizaciones page with the same layout works well.</p>
+    </div>
+    <div class="annotation content">
+      <div class="annotation-type">Nav</div>
+      <h4>"Updates" in the main nav</h4>
+      <p>This page earns a spot in the main navigation — it's a destination people will return to repeatedly, not just visit once. Placing it between Get Involved and the language toggle keeps the nav from feeling cluttered while making the page discoverable.</p>
+    </div>
+  </div>
+</div>
+
+<div id="design" class="page-section">
+  <div class="page-title-block">
+    <div class="section-label">🎨 Design Reference</div>
+    <h2>Design System & Brand Guidelines</h2>
+    <p>A reference for whoever builds the site in Squarespace — covering color usage, typography, and component patterns.</p>
+  </div>
+
+  <div class="overview-card">
+    <h3>🎨 Color System</h3>
+    <div class="color-system">
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#F2C422;"></div>
+        <div class="color-swatch-info"><div class="name">Gold</div><div class="hex">#F2C422</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#0B2346;"></div>
+        <div class="color-swatch-info"><div class="name">Navy</div><div class="hex">#0B2346</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#FFFBB6;"></div>
+        <div class="color-swatch-info"><div class="name">Light Gold</div><div class="hex">#FFFBB6</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#1B3A5C;"></div>
+        <div class="color-swatch-info"><div class="name">Navy Mid</div><div class="hex">#1B3A5C</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#C0392B;"></div>
+        <div class="color-swatch-info"><div class="name">Alert Red</div><div class="hex">#C0392B</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#F8F6F0;"></div>
+        <div class="color-swatch-info"><div class="name">Off-white</div><div class="hex">#F8F6F0</div></div>
+      </div>
+    </div>
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:8px;">
+      <div class="overview-row"><div class="zone">Gold (#F2C422)</div><div class="desc">Use for: primary CTA buttons, hotline banner background, section accents, stat numbers. Never use for body text — fails contrast on white backgrounds.</div></div>
+      <div class="overview-row"><div class="zone">Navy (#0B2346)</div><div class="desc">Use for: navbar, footer, hero backgrounds, headings, body text. The primary trust color. Dominant on dark sections.</div></div>
+      <div class="overview-row"><div class="zone">Light Gold (#FFFBB6)</div><div class="desc">Use for: background tints only (event tags, highlight boxes). Too light for text or CTAs. Never use as a button color.</div></div>
+      <div class="overview-row"><div class="zone">Alert Red (#C0392B)</div><div class="desc">Use sparingly: Get Help page hero, urgency indicators only. Should feel like an alarm — loses impact if overused.</div></div>
+      <div class="overview-row"><div class="zone">Off-white (#F8F6F0)</div><div class="desc">Use for: page section alternating backgrounds, card backgrounds. Warmer than pure white — feels community-centered rather than clinical.</div></div>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>✍️ Typography</h3>
+    <div class="type-specimen">
+      <div class="type-specimen-row">
+        <div class="type-label">Display / Headings — DM Serif Display</div>
+        <div style="font-family:'DM Serif Display',Georgia,serif;font-size:32px;color:var(--navy);line-height:1.2;">Protecting our community</div>
+        <div style="font-family:'DM Serif Display',Georgia,serif;font-size:32px;color:var(--navy);font-style:italic;line-height:1.2;">since 2016</div>
+      </div>
+      <div class="type-specimen-row">
+        <div class="type-label">Body / UI — DM Sans</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:15px;color:var(--navy);line-height:1.65;max-width:500px;">Our hotline is free, confidential, and available 24 hours a day. You do not need documentation to call. We speak English and Spanish.</div>
+      </div>
+      <div class="type-specimen-row">
+        <div class="type-label">Labels / Eyebrows — DM Sans Bold Uppercase</div>
+        <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);">24/7 Emergency Hotline · Santa Clara County</div>
+      </div>
+      <div class="type-specimen-row">
+        <div class="type-label">Hotline Number — DM Serif Display Large</div>
+        <div style="font-family:'DM Serif Display',Georgia,serif;font-size:44px;color:var(--navy);line-height:1;">408-290-1144</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--gray);margin-top:12px;">Both fonts are available free via Google Fonts and can be loaded in Squarespace under Design → Fonts. DM Serif Display for all headings (H1–H3), DM Sans for all body text, labels, and UI elements.</p>
+  </div>
+
+  <div class="overview-card">
+    <h3>📐 Squarespace Build Notes</h3>
+    <div class="overview-rows">
+      <div class="overview-row"><div class="zone">Hotline CTA</div><div class="desc">Add the hotline number as a sticky button or announcement bar at the very top of every page. In Squarespace: Website → Pages → Website Tools → Announcement Bar.</div></div>
+      <div class="overview-row"><div class="zone">Bilingual pages</div><div class="desc">Use Squarespace's built-in "Translated pages" feature or duplicate pages with /es/ URL prefix. Add the EN | ES toggle as a navigation link. Keep the same page structure — swap text only.</div></div>
+      <div class="overview-row"><div class="zone">Events block</div><div class="desc">Use Squarespace's native Events page type for the trainings on Get Involved. Allows easy staff updates without touching code. Each event: title, date/time, location, description, registration link.</div></div>
+      <div class="overview-row"><div class="zone">Donate button</div><div class="desc">Link to your external donation page. Set to open in a new tab (target="_blank"). In Squarespace: Button block → URL → check "Open in new window."</div></div>
+      <div class="overview-row"><div class="zone">Phone number links</div><div class="desc">Any instance of the hotline number should be a Button or Link block with URL: tel:4082901144 — this makes it tappable on mobile. Do not put the number in plain text.</div></div>
+      <div class="overview-row"><div class="zone">Social media</div><div class="desc">Instagram: instagram.com/scc_rapidresponsenetwork · Facebook: facebook.com/RRNSCC. Add via Squarespace's Social Links block in the footer on every page.</div></div>
+      <div class="overview-row"><div class="zone">Logo placement</div><div class="desc">Official logo goes in the navbar (left side) and footer. In Squarespace: Design → Logo & Title. Upload as PNG with transparent background for best results on dark navy backgrounds.</div></div>
+      <div class="overview-row"><div class="zone">Contact/Media page</div><div class="desc">Create as a standard page at /contact. Link from footer on every page. Optionally add a small "Media" text link in the nav. Never route media emails to the hotline or to outreach@ — keep communications@ exclusively for press.</div></div>
+      <div class="overview-row"><div class="zone">Instagram embed</div><div class="desc">Squarespace supports Instagram feed embeds via the Instagram Block. Go to Edit Page → Add Block → Instagram. Connect your account (scc_rapidresponsenetwork). Shows latest 4–8 posts automatically — no manual updates needed.</div></div>
+      <div class="overview-row"><div class="zone">Downloadable PDFs</div><div class="desc">Upload PDFs (hotline card, KYR card, legal referral list) via Squarespace Files. Then link each Download button to the file URL. PDFs appear as downloads on mobile and open in browser on desktop.</div></div>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <h3>📱 Mobile Priorities</h3>
+    <div class="overview-rows">
+      <div class="overview-row"><div class="zone">Above the fold</div><div class="desc">On mobile, the hotline number and a "Call Now" button must be visible without scrolling on the Get Help page. Test on a real phone before publishing.</div></div>
+      <div class="overview-row"><div class="zone">Font sizes</div>
+      <div class="overview-row"><div class="zone">Updates page</div><div class="desc">Build the Updates feed using Squarespace's Blog page type. Create three post categories: "ICE Confirmed", "Cleared / Not ICE", and "Resource". Tag each post so visitors can filter by type. URL: /updates</div></div>
+      <div class="overview-row"><div class="zone">Updates — bilingual</div><div class="desc">The Updates page and Get Help page should be the first two translated into Spanish. Mirror the same layout at /es/actualizaciones — swap text only, keep same post structure.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.page-nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
